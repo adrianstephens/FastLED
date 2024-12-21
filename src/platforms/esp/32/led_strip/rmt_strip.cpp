@@ -45,14 +45,14 @@ class RmtLedStripNoRecyle : public IRmtLedStrip {
 public:
     RmtLedStripNoRecyle(uint16_t T0H, uint16_t T0L, uint16_t T1H, uint16_t T1L, uint32_t TRESET,
                 int pin, uint32_t max_leds, bool is_rgbw)
-        : mT0H(T0H),
+        : mPin(pin),
+          mIsRgbw(is_rgbw),
+          mMaxLeds(max_leds),
+          mT0H(T0H),
           mT0L(T0L),
           mT1H(T1H),
           mT1L(T1L),
-          mTRESET(TRESET),
-          mIsRgbw(is_rgbw),
-          mPin(pin),
-          mMaxLeds(max_leds) {
+          mTRESET(TRESET) {
         const uint8_t bytes_per_pixel = is_rgbw ? 4 : 3;
         mBuffer = static_cast<uint8_t*>(calloc(max_leds, bytes_per_pixel));
         acquire_rmt();
@@ -195,14 +195,14 @@ class RmtLedStrip : public IRmtLedStrip {
 public:
     RmtLedStrip(uint16_t T0H, uint16_t T0L, uint16_t T1H, uint16_t T1L, uint32_t TRESET,
                 int pin, uint32_t max_leds, bool is_rgbw)
-        : mT0H(T0H),
+        : mPin(pin),
+          mIsRgbw(is_rgbw),
+          mMaxLeds(max_leds),
+          mT0H(T0H),
           mT0L(T0L),
           mT1H(T1H),
           mT1L(T1L),
-          mTRESET(TRESET),
-          mIsRgbw(is_rgbw),
-          mPin(pin),
-          mMaxLeds(max_leds) {
+          mTRESET(TRESET) {
         const uint8_t bytes_per_pixel = is_rgbw ? 4 : 3;
         mBuffer = static_cast<uint8_t*>(calloc(max_leds, bytes_per_pixel));
     }
